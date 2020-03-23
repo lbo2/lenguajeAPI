@@ -7,13 +7,14 @@ dotenv.config({ path: './config/config.env' });
 
 connectDB();
 
-const transactions = require('./routes/transactions');
+// const transactions = require('./routes/transactions');
+const alumnos = require('./routes/alumnos');
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/api/v1/transactions', transactions);
+app.use('/api/v1/alumnos', alumnos);
 
 const PORT = process.env.PORT || 5000;
 
