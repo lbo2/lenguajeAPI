@@ -65,7 +65,7 @@ exports.updateAlumno = async (req, res, next) => {
                 error: 'No se encontro alumno'
             });
         }
-        await Alumnos.update({ rut: rut }, {
+        await Alumnos.updateOne({ rut: rut }, {
             "nombres": (nombres ? nombres : alumno.nombres),
             "apellidos": (apellidos ? apellidos : alumno.apellidos),
             "password": (password ? password : alumno.password),
