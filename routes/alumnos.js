@@ -3,6 +3,7 @@ const router = express.Router();
 const { getAlumnos, addAlumno, deleteAlumno, updateAlumno } = require('../controllers/alumnos');
 const { getCursos, addCurso, deleteCurso, updateCurso } = require('../controllers/cursos');
 const { getExamenes, addExamen, deleteExamen, updateExamen } = require('../controllers/examenes');
+const { getPreguntas, addPregunta, deletePregunta, updatePregunta } = require('../controllers/preguntas');
 const { login } = require('../controllers/login');
 
 router.route('/')
@@ -34,6 +35,16 @@ router.route('/examenes/updateExamen')
      
 router.route('/examenes/:id')
     .delete(deleteExamen);
+
+router.route('/preguntas/')
+    .get(getPreguntas)
+    .post(addPregunta);
+
+router.route('/preguntas/updatePregunta')
+    .post(updatePregunta);
+     
+router.route('/preguntas/:id')
+    .delete(deletePregunta);
      
 router.route('/:id')
     .delete(deleteAlumno);
