@@ -27,13 +27,19 @@ exports.addAlumno = async (req, res, next) => {
     console.log('addAlumno');
     try {
         const { rut, nombres, apellidos, password, curso, mail, type } = req.body;
-
-        const alumno = await Alumnos.create(req.body);
-    
-        return res.status(201).json({
-            success: true,
-            data: alumno
-        });
+        const existe = await Alumnos.findOne({ rut: rut });
+        if(!existe){
+            const alumno = await Alumnos.create(req.body);
+            return res.status(201).json({
+                success: true,
+                data: alumno
+            });
+        } else {
+            return res.status(400).json({
+                success: false,
+                error: 'Alumno ya existe'
+            });
+        }
     } catch (err) {
         if(err.name === 'ValidationError') {
             const messages = Object.values(err.errors).map(val => val.message);
@@ -98,7 +104,7 @@ exports.deleteAlumno = async (req, res, next) => {
                 error: 'No se encontro alumno'
             });
         }
-        await Alumnos.remove();
+        await Alumnos.remove({ _id: req.params.id });
         return res.status(200).json({
             success: true,
             data: {}
