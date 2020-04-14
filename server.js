@@ -14,6 +14,7 @@ const examenes = require('./routes/examenes');
 const login = require('./routes/login');
 const preguntas = require('./routes/preguntas');
 const tipos = require('./routes/tipos');
+const respuestas = require('./routes/respuestas');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/v1/alumnos', examenes);
 app.use('/api/v1/alumnos', login);
 app.use('/api/v1/alumnos', preguntas);
 app.use('/api/v1/alumnos', tipos);
+app.use('/api/v1/alumnos', respuestas);
 
 const PORT = process.env.PORT || 5000;
 
