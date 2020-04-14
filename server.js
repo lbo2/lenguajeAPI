@@ -7,14 +7,24 @@ dotenv.config({ path: './config/config.env' });
 
 connectDB();
 
-// const transactions = require('./routes/transactions');
+// RUTAS
 const alumnos = require('./routes/alumnos');
+const cursos = require('./routes/cursos');
+const examenes = require('./routes/examenes');
+const login = require('./routes/login');
+const preguntas = require('./routes/preguntas');
+const tipos = require('./routes/tipos');
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/api/v1/alumnos', alumnos);
+app.use('/api/v1/alumnos', cursos);
+app.use('/api/v1/alumnos', examenes);
+app.use('/api/v1/alumnos', login);
+app.use('/api/v1/alumnos', preguntas);
+app.use('/api/v1/alumnos', tipos);
 
 const PORT = process.env.PORT || 5000;
 
