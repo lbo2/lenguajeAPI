@@ -20,6 +20,33 @@ exports.getPreguntas = async (req, res, next) => {
     }
 }
 
+// @desc        get preguntas by exam
+// @route       GET /api/v1/alumnos/preguntas
+// @access      public
+exports.getPreguntasByExam = async (req, res, next) => {
+    try {
+        const { idExamen } = req.body;
+        const examen = await Preguntas.findOne({ idExamen: idExamen});
+        if(examen) {
+            return res.status(200).json({
+                success: true,
+                data: examen
+            });
+        } else {
+            return res.status(400).json({
+                success: false,
+                error: 'No existe examen'
+            });
+        }
+        
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server error'
+        })
+    }
+}
+
 // @desc        add preguntas
 // @route       POST /api/v1/alumnos/preguntas
 // @access      public
