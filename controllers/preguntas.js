@@ -56,7 +56,7 @@ exports.addPregunta = async (req, res, next) => {
         const { idExamen, preguntas } = req.body;
         req.body.createdAt = Date.now();
         req.body.updatedAt = Date.now();
-        const existeidExamen = await Preguntas.findOne({ idExamen: idExamen});
+        const existeidExamen = await Preguntas.findOne({ "idExamen": idExamen, "preguntas.idPregunta": preguntas.idPregunta });
         if(!existeidExamen){
             const examen = await Preguntas.create(req.body);
             return res.status(201).json({
@@ -66,7 +66,7 @@ exports.addPregunta = async (req, res, next) => {
         } else {
             return res.status(400).json({
                 success: false,
-                error: 'Ya existe examen'
+                error: 'Ya existe pregunta en examen'
             });
         }
     } catch (err) {
